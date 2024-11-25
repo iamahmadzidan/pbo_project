@@ -10,7 +10,7 @@ class ProfilePage extends StatelessWidget {
         title: const Text('Profil'),
       ),
       body: const Center(
-        child: Text('Ini adalah halaman Profil'),
+        child: Text('Ini adalah hasasalama Profil'),
       ),
     );
   }

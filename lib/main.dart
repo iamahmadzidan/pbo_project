@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'halaman/login_page.dart'; // Import halaman login
 import 'halaman/home_page.dart';
 import 'halaman/activity_page.dart';
 import 'halaman/profile_page.dart';
@@ -18,14 +19,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:
-          const _MainNavigation(), // Make sure this matches the private widget
+      home: const LoginPage(), // Menampilkan halaman login terlebih dahulu
     );
   }
 }
 
 class _MainNavigation extends StatefulWidget {
-  // Private StatefulWidget
   const _MainNavigation();
 
   @override
@@ -33,7 +32,6 @@ class _MainNavigation extends StatefulWidget {
 }
 
 class _MainNavigationState extends State<_MainNavigation> {
-  // Private State class
   int _currentIndex = 0;
 
   final List<Widget> _pages = [

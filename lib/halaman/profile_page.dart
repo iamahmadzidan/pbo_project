@@ -47,7 +47,7 @@ class ProfilePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Nama: Fadhil Hilmy',
+                            'Nama: Fadhl Hilmy',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,

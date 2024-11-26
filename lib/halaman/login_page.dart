@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart'; // Pastikan HomePage sudah di-import
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,20 +12,16 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  // Fungsi untuk validasi login
   void _login() {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    // Cek apakah email dan password tidak kosong
     if (email.isNotEmpty && password.isNotEmpty) {
-      // Jika valid, arahkan ke halaman HomePage
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const HomePage()),
       );
     } else {
-      // Jika input kosong, tampilkan error
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter both email and password')),
       );
@@ -34,124 +30,128 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Mendapatkan ukuran layar
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Container(
-        width: screenWidth,
-        height: screenHeight,
-        clipBehavior: Clip.antiAlias,
-        decoration: const BoxDecoration(color: Colors.white),
-        child: Stack(
-          children: [
-            Positioned(
-              left: screenWidth * 0.08,
-              top: screenHeight * 0.54,
-              child: Container(
-                width: screenWidth * 0.85,
-                height: 40,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(width: 1, color: Color(0xFFDFDFDF)),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: TextField(
-                  controller: _emailController,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter your email',
-                    border: InputBorder.none,
-                  ),
+      appBar: AppBar(
+        title: const Text(
+          "Login",
+          style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: const Color(0xFF099AF5),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          width: screenWidth,
+          height: screenHeight,
+          decoration: const BoxDecoration(color: Colors.white),
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/image/undraw_Login_re_4vu2.png',
+                width: screenWidth * 0.7,
+                height: screenHeight * 0.3,
+                fit: BoxFit.contain,
+              ),
+              const SizedBox(height: 16.0),
+              const Text(
+                "Sign in to your account",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
               ),
-            ),
-            Positioned(
-              left: screenWidth * 0.08,
-              top: screenHeight * 0.62,
-              child: Container(
-                width: screenWidth * 0.85,
-                height: 40,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(width: 1, color: Color(0xFFDFDFDF)),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: TextField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter your password',
-                    border: InputBorder.none,
-                  ),
-                ),
+              const SizedBox(height: 24.0),
+              _buildTextField(
+                controller: _emailController,
+                hintText: 'Enter your email',
+                isPassword: false,
               ),
-            ),
-            Positioned(
-              left: screenWidth * 0.08,
-              top: screenHeight * 0.75,
-              child: GestureDetector(
-                onTap: _login, // Menangani klik pada tombol sign in
+              const SizedBox(height: 16.0),
+              _buildTextField(
+                controller: _passwordController,
+                hintText: 'Enter your password',
+                isPassword: true,
+              ),
+              const SizedBox(height: 32.0),
+              GestureDetector(
+                onTap: _login,
                 child: Container(
                   width: screenWidth * 0.85,
                   height: 60,
-                  decoration: ShapeDecoration(
+                  decoration: BoxDecoration(
                     color: const Color(0xFF3DABF0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
+                    borderRadius: BorderRadius.circular(30),
                   ),
                   child: const Center(
                     child: Text(
                       'Sign in',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 14,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              left: screenWidth * 0.08,
-              top: screenHeight * 0.84,
-              child: GestureDetector(
+              const SizedBox(height: 16.0),
+              GestureDetector(
                 onTap: () {
                   // Logika untuk sign in dengan Google
                 },
                 child: Container(
                   width: screenWidth * 0.85,
                   height: 60,
-                  decoration: ShapeDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      side: const BorderSide(width: 1),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(30),
                   ),
                   child: const Center(
                     child: Text(
                       'Sign in with Google',
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 13,
+                        fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField(
+      {required TextEditingController controller,
+      required String hintText,
+      required bool isPassword}) {
+    return Container(
+      width: double.infinity,
+      height: 50,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: const Color(0xFFDFDFDF)),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: TextField(
+        controller: controller,
+        obscureText: isPassword,
+        decoration: InputDecoration(
+          hintText: hintText,
+          border: InputBorder.none,
         ),
       ),
     );

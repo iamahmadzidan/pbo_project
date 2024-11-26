@@ -6,14 +6,41 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    const Center(child: Text("Home Content")),
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 22),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Welcome back!'),
+              SizedBox(height: 2),
+              Text(
+                "Bruce Wayne T",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const Expanded(
+          child: Center(
+            child: Text("Home Content"),
+          ),
+        ),
+      ],
+    ),
     const ActivityPage(),
     const ProfilePage(),
   ];
@@ -26,30 +53,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(child: Column(
-        children: [
-          SizedBox(height: 22,),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: [
-                Text('Welcome back!'),
-                SizedBox(height: 2),
-                Text(
-                  "Bruce wyne T", 
-                  style: TextStyle(fontSize: 25,
-                  fontWeight: FontWeight.bold),
-                
-                  )
-              ]
-            ),
-          )
-
-
     return Scaffold(
-      appBar: AppBar(title: const Text("Welcome back!")),
-      body: _pages[_currentIndex], // Menampilkan konten sesuai tab yang dipilih
+      body: SafeArea(
+        child: _pages[_currentIndex],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
@@ -71,3 +78,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+

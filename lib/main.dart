@@ -1,8 +1,7 @@
+import 'package:apps_pbo/state_util.dart';
+import 'package:apps_pbo/core.dart';
 import 'package:flutter/material.dart';
-import 'halaman/login_page.dart'; // Import halaman login
-import 'halaman/home_page.dart';
-import 'halaman/activity_page.dart';
-import 'halaman/profile_page.dart';
+// Import halaman login
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Volunteer App',
+      navigatorKey: Get.navigatorKey,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

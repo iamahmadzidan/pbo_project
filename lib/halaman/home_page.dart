@@ -26,6 +26,27 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    return const Scaffold(
+      body: SafeArea(child: Column(
+        children: [
+          SizedBox(height: 22,),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                Text('Welcome back!'),
+                SizedBox(height: 2),
+                Text(
+                  "Bruce wyne T", 
+                  style: TextStyle(fontSize: 25,
+                  fontWeight: FontWeight.bold),
+                
+                  )
+              ]
+            ),
+          )
+
+
     return Scaffold(
       appBar: AppBar(title: const Text("Welcome back!")),
       body: _pages[_currentIndex], // Menampilkan konten sesuai tab yang dipilih

@@ -13,33 +13,59 @@ class HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 22),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF099AF5),
+        automaticallyImplyLeading: false, // Menghilangkan ikon back default
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          child: Row(
             children: [
-              Text('Welcome back!'),
-              SizedBox(height: 2),
-              Text(
-                "Bruce Wayne T",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
+              // Kolom untuk teks "Welcome back!" dan nama pengguna
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Welcome back!',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(height: 2),
+                  Text(
+                    "Bruce Wayne T",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+              const Spacer(),
+              // Gambar profil yang bulat
+              ClipRRect(
+                borderRadius: BorderRadius.circular(60),
+                child: Image.asset(
+                  'assets/image/ryou.jpeg',
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
                 ),
               ),
             ],
           ),
         ),
-        const Expanded(
-          child: Center(
-            child: Text("Home Content"),
+      ),
+      body: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 22),
+          Expanded(
+            child: Center(
+              child: Text("Home Content"),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
     const ActivityPage(),
     const ProfilePage(),
@@ -54,6 +80,7 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     
       body: SafeArea(
         child: _pages[_currentIndex],
       ),
@@ -78,5 +105,3 @@ class HomePageState extends State<HomePage> {
     );
   }
 }
-
-

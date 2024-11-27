@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
-import 'register_page.dart'; // Pastikan untuk import halaman Register
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _login() {
+  void _register() {
     String email = _emailController.text;
     String password = _passwordController.text;
 
     if (email.isNotEmpty && password.isNotEmpty) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+      // Proses registrasi dengan Firebase (akan dibahas nanti)
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Registration Successful')),
       );
+      Navigator.pop(context); // Kembali ke halaman login setelah sukses
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter both email and password')),
@@ -37,11 +35,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Login",
-          style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
+        title: const Text("Register"),
         centerTitle: true,
         backgroundColor: const Color(0xFF099AF5),
       ),
@@ -49,25 +43,14 @@ class _LoginPageState extends State<LoginPage> {
         child: Container(
           width: screenWidth,
           height: screenHeight,
-          decoration: const BoxDecoration(color: Colors.white),
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/image/undraw_Login_re_4vu2.png',
-                width: screenWidth * 0.7,
-                height: screenHeight * 0.3,
-                fit: BoxFit.contain,
-              ),
               const SizedBox(height: 16.0),
               const Text(
-                "Sign in to your account",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
+                "Create a new account",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 24.0),
               _buildTextField(
@@ -83,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 32.0),
               GestureDetector(
-                onTap: _login,
+                onTap: _register,
                 child: Container(
                   width: screenWidth * 0.85,
                   height: 60,
@@ -93,31 +76,13 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: const Center(
                     child: Text(
-                      'Sign in',
+                      'Register',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16.0),
-              GestureDetector(
-                onTap: () {
-                  // Navigasi ke halaman Register ketika klik
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const RegisterPage()),
-                  );
-                },
-                child: const Text(
-                  "Don't have an account? Register here",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xFF3DABF0),
-                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),

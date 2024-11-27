@@ -64,13 +64,15 @@ class HomeContent extends StatelessWidget {
         child: Column(
           children: [
             _buildSearch(),
+            const SizedBox(height: 10),
             builText(),
-            space(),
+            const SizedBox(height: 5),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: buildHorizontalScroll(),
             ),
-            const SizedBox(height: 20), // Tambahkan jarak jika diperlukan
+            const SizedBox(height: 20),
+            buildHost() // Tambahkan jarak jika diperlukan
           ],
         ),
       ),
@@ -96,7 +98,7 @@ class HomeContent extends StatelessWidget {
                 ),
                 SizedBox(height: 2),
                 Text(
-                  "Bruce Wayne T",
+                  "Batman ",
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -109,7 +111,7 @@ class HomeContent extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(60),
               child: Image.asset(
-                'assets/image/ryou.jpeg',
+                'assets/image/batman.jpeg',
                 width: 50,
                 height: 50,
                 fit: BoxFit.cover,
@@ -208,22 +210,65 @@ class HomeContent extends StatelessWidget {
 
   // Widget untuk scroll horizontal
   Widget buildHorizontalScroll() {
+    // Data untuk setiap event
+    final List<Map<String, dynamic>> eventData = [
+      {
+        "image": 'assets/image/image6.jpg',
+        "title": 'Clean up Trash\nHero Jakarta\nKe-174',
+        "date": '1 Dec 2024',
+        "location": 'DKI Jakarta',
+        "exp": 'EXP+100',
+      },
+      {
+        "image": 'assets/image/image2.jpg',
+        "title": 'Planting Trees\nHero Bandung\nKe-45',
+        "date": '5 Dec 2024',
+        "location": 'Bandung, Jawa Barat',
+        "exp": 'EXP+200',
+      },
+      {
+        "image": 'assets/image/image3.jpg',
+        "title": 'Beach Cleanup\nHero Bali\nKe-78',
+        "date": '10 Dec 2024',
+        "location": 'Bali',
+        "exp": 'EXP+300',
+      },
+      {
+        "image": 'assets/image/image4.jpg',
+        "title": 'Recycle Drive\nHero Surabaya\nKe-30',
+        "date": '15 Dec 2024',
+        "location": 'Surabaya',
+        "exp": 'EXP+150',
+      },
+    ];
+
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal, // Scroll horizontal
+      scrollDirection: Axis.horizontal,
       child: Row(
-        children: [
-          _buildEventWidget(),
-          const SizedBox(width: 10),
-          _buildEventWidget(),
-          const SizedBox(width: 10),
-          _buildEventWidget(),
-          const SizedBox(width: 10),
-          _buildEventWidget(),
-        ],
+        children: eventData.map((event) {
+          return Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: _buildEventWidget(
+              image: event['image'],
+              title: event['title'],
+              date: event['date'],
+              location: event['location'],
+              exp: event['exp'],
+            ),
+          );
+        }).toList(),
       ),
     );
   }
-  Widget _buildEventWidget() {
+
+// Widget yang fleksibel dengan parameter
+  Widget _buildEventWidget({
+    required String image,
+    required String title,
+    required String date,
+    required String location,
+    required String exp,
+  }) {
     return Container(
       width: 230,
       height: 232,
@@ -235,41 +280,58 @@ class HomeContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image + Title
+          // Image (Circular) + Title
           Row(
             children: [
-              Image.asset(
-                'assets/image/ryou.jpeg',
-                width: 50,
-                height: 50,
+              ClipOval(
+                child: Image.asset(
+                  image,
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox(width: 16),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Clean up Trash\nHero Jakarta\nKe-174',
-                  style: TextStyle(
+                  title,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
+                  maxLines: 2, // Membatasi maksimal 2 baris
+                  overflow: TextOverflow.ellipsis, // Teks yang meluap akan diberi ...
                 ),
               ),
             ],
           ),
           const SizedBox(height: 8),
           // Teks tambahan (misalnya tanggal atau lokasi)
-          const Row(
+          Row(
             children: [
-              Icon(Icons.calendar_today, size: 16),
-              SizedBox(width: 4),
-              Text('1 Dec 2024'),
+              const Icon(Icons.calendar_today, size: 16),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Text(
+                  date,
+                  style: const TextStyle(fontSize: 14),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 8),
-          const Row(
+          Row(
             children: [
-              Icon(Icons.location_on, size: 16),
-              SizedBox(width: 4),
-              Text('DKI Jakarta'),
+              const Icon(Icons.location_on, size: 16),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Text(
+                  location,
+                  style: const TextStyle(fontSize: 14),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 16),
@@ -277,9 +339,14 @@ class HomeContent extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('EXP+100'),
+              Text(
+                exp,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Tambahkan aksi saat tombol ditekan
+                },
                 child: const Text('More Info'),
               ),
             ],
@@ -288,5 +355,120 @@ class HomeContent extends StatelessWidget {
       ),
     );
   }
+
+
+
+  Widget builText_1() {
+  return const Padding(
+    padding: EdgeInsets.symmetric(horizontal: 30.0), // Margin kiri dan kanan
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween, // Membuat jarak antara kedua teks
+      children: [
+        // Teks kiri
+        Text(
+          'Popular Host',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+        // Teks kanan
+        Text(
+          'See all', // Ganti dengan teks yang diinginkan
+          style: TextStyle(fontSize: 14, color: Color(0xFF099AF5)),
+        ),
+      ],
+    ),
+  );
 }
+
+ Widget buildHost() {
+  // Daftar gambar dan teks untuk setiap item
+  final List<Map<String, String>> items = [
+    {
+      'image': 'assets/image/image1.jpg',
+      'text': 'Trash World',
+    },
+    {
+      'image': 'assets/image/image2.jpg',
+      'text': 'YAI',
+    },
+    {
+      'image': 'assets/image/image3.jpg',
+      'text': 'Ant Charity',
+    },
+    {
+      'image': 'assets/image/image4.jpg',
+      'text': 'Clean up Trash 4',
+    },
+    {
+      'image': 'assets/image/image5.jpg',
+      'text': 'HIVE',
+    },
+    {
+      'image': 'assets/image/image6.jpg',
+      'text':'WWF',
+    },
+    {
+      'image': 'assets/image/image7.jpg',
+      'text': 'Indo Relawan',
+    },
+    {
+      'image': 'assets/image/image8.jpg',
+      'text': 'Pandawara group',
+    },
+  ];
+
+  return GridView.builder(
+    itemCount: items.length, // Jumlah item berdasarkan daftar items
+    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2, // Jumlah kolom
+      mainAxisExtent: 238, // Tinggi maksimum setiap item
+      crossAxisSpacing: 15, // Jarak horizontal antar item
+      mainAxisSpacing: 24, // Jarak vertikal antar item
+    ),
+    shrinkWrap: true,
+    physics: const NeverScrollableScrollPhysics(), // Non-scrollable
+    itemBuilder: (context, index) {
+      // Widget untuk setiap item
+      return Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center, // Konten ke tengah secara vertikal
+            children: [
+              // Gambar berbentuk lingkaran
+              ClipOval(
+                child: Image.asset(
+                  items[index]['image']!, // Gambar berdasarkan indeks
+                  width: 100, // Ukuran lebar gambar
+                  height: 100, // Ukuran tinggi gambar
+                  fit: BoxFit.cover, // Memastikan gambar terpotong dengan baik dalam lingkaran
+                ),
+              ),
+              const SizedBox(height: 12), // Jarak antara gambar dan teks
+              // Teks di bawah gambar
+              Text(
+                items[index]['text']!, // Teks berdasarkan indeks
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+}
+
+
+
+
 

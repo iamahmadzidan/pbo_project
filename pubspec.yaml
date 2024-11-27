@@ -63,6 +63,15 @@ flutter:
      - assets/image/undraw_Login_re_4vu2.png
      - assets/image/ryou.jpeg
      - assets/image/image.png
+     - assets/image/image1.jpg
+     - assets/image/image2.jpg
+     - assets/image/image3.jpg
+     - assets/image/batman.jpeg
+     - assets/image/image4.jpg
+     - assets/image/image5.jpg
+     - assets/image/image6.jpg
+     - assets/image/image7.jpg
+     - assets/image/image8.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

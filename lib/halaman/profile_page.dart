@@ -7,11 +7,12 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin {
   String _name = "Dreamybullxxx";
   String _age = "19 Tahun";
   String _job = "Collage Student";
   String _location = "Somba Opu, Reg.Gowa";
+  bool _isFaqExpanded = false;
 
   void _editProfile() {
     TextEditingController nameController = TextEditingController(text: _name);
@@ -87,7 +88,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 180,
                       child: Row(
                         children: [
-                          // Foto Profil
                           Container(
                             width: 130,
                             height: double.infinity,
@@ -103,12 +103,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           const SizedBox(width: 16),
-                          // Informasi Akun
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const SizedBox(height: 15,),
+                                const SizedBox(height: 15),
                                 Text(
                                   _name,
                                   style: const TextStyle(
@@ -116,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
-                                const SizedBox(height: 2,),
+                                const SizedBox(height: 2),
                                 Text(
                                   _age,
                                   style: const TextStyle(
@@ -124,7 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
-                                const SizedBox(height: 25,),
+                                const SizedBox(height: 25),
                                 Text(
                                   _job,
                                   style: const TextStyle(fontSize: 11),
@@ -140,7 +139,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     onPressed: _editProfile,
                                     style: TextButton.styleFrom(
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10), // Sesuaikan nilai radius sesuai keinginan
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
                                       backgroundColor: Colors.blue,
                                       foregroundColor: Colors.white,
@@ -157,7 +156,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ),
-                // Konten Bawah (Scrollable)
                 Positioned.fill(
                   top: 100,
                   child: SingleChildScrollView(
@@ -166,6 +164,43 @@ class _ProfilePageState extends State<ProfilePage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         const SizedBox(height: 20),
+                        // Tombol FAQ
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _isFaqExpanded = !_isFaqExpanded;
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: const Text('F.A.Q.'),
+                        ),
+                        // Konten Dropdown FAQ
+                        AnimatedSize(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                          child: _isFaqExpanded
+                              ? Container(
+                            padding: const EdgeInsets.all(16),
+                            color: Colors.grey[200],
+                            child: const Text(
+                              '(Cari sendiri jawabannya)\n'
+                              'F.A.Q. - Frequently Asked Questions\n\n'
+                                  '1. Bagaimana cara mengubah profil?\n'
+                                  '2. Apa yang terjadi jika saya lupa logout?\n'
+                                  '3. Bagaimana cara menghubungi support?',
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          )
+                              : const SizedBox.shrink(),
+                        ),
+                        const SizedBox(height: 10),
+                        // Tombol Logout
                         ElevatedButton(
                           onPressed: () {
                             // Tambahkan logika logout

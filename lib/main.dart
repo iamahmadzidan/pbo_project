@@ -1,9 +1,18 @@
+import 'package:apps_pbo/state_util.dart';
+import 'package:apps_pbo/core.dart';
 import 'package:flutter/material.dart';
-import 'halaman/home_page.dart';
-import 'halaman/activity_page.dart';
-import 'halaman/profile_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+
+// Import halaman login
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform, // Pastikan file ini tersedia
+  );
+  
   runApp(const MyApp());
 }
 
@@ -15,17 +24,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Volunteer App',
+      navigatorKey: Get.navigatorKey,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:
-          const _MainNavigation(), // Make sure this matches the private widget
+      home: const LoginPage(), // Menampilkan halaman login terlebih dahulu
     );
   }
 }
 
 class _MainNavigation extends StatefulWidget {
-  // Private StatefulWidget
   const _MainNavigation();
 
   @override
@@ -33,7 +41,6 @@ class _MainNavigation extends StatefulWidget {
 }
 
 class _MainNavigationState extends State<_MainNavigation> {
-  // Private State class
   int _currentIndex = 0;
 
   final List<Widget> _pages = [

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "314110157854",
+    "project_id": "impactify-pbo",
+    "storage_bucket": "impactify-pbo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314110157854:android:a79bc32ab2b8965ef03a0f",
+        "android_client_info": {
+          "package_name": "com.example.apps.pbo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBZ-tH87lBZ_kmTDqTO-aH0LpdHeykPi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

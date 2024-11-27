@@ -24,14 +24,34 @@
       "request": "launch",
       "program": "lib/main.dart"
     },
-
     {
       "name": "Flutter: Launch Pixel 6 API 28",
       "request": "launch",
       "type": "flutter",
       "program": "lib/main.dart",
       "deviceId": "Pixel_6_API_28",
-      "toolArgs": ["--no-sound-null-safety"]
+      "toolArgs": [
+        "--no-sound-null-safety"
+      ]
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/LENOVO/Documents/GitHub/pbo_project/linux",
+      "program": "c:/Users/LENOVO/Documents/GitHub/pbo_project/linux/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
     }
   ]
 }

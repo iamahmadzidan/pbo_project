@@ -1,10 +1,18 @@
 import 'package:apps_pbo/state_util.dart';
 import 'package:apps_pbo/core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 
 // Import halaman login
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform, // Pastikan file ini tersedia
+  );
+  
   runApp(const MyApp());
 }
 
